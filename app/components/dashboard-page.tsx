@@ -3,7 +3,7 @@
 import { useState } from "react"
 import { Button } from "@/components/ui/button"
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
-import { Sun, Moon, Navigation, Home, BarChart3, Route, Clock, MapPin, TrendingUp, RotateCcw } from "lucide-react"
+import { Sun, Moon, Navigation, Home, BarChart3, Route, Clock, MapPin, TrendingUp, RotateCcw,Zap } from "lucide-react"
 import type { Page } from "../page"
 
 interface DashboardPageProps {

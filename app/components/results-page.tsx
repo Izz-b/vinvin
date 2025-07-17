@@ -22,6 +22,7 @@ import {
   Info,
   CheckCircle,
   AlertCircle,
+  Zap
 } from "lucide-react"
 import type { Page, TripData, PredictionResult } from "../page"
 
@@ -197,7 +198,7 @@ export default function ResultsPage({
             <ArrowLeft className="w-5 h-5" />
           </Button>
           <div className="flex items-center gap-2">
-            <Navigation className="w-6 h-6 text-blue-500" />
+            <Zap className="w-6 h-6 text-blue-500" />
             <h1 className="text-xl font-bold text-foreground">
               {language === "en" ? "Your Smart Route" : "طريقك الذكي"}
             </h1>

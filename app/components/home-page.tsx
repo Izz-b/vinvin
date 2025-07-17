@@ -5,7 +5,7 @@ import { Button } from "@/components/ui/button"
 import { Card, CardContent } from "@/components/ui/card"
 import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
-import { Car, Bike, Truck, Navigation, Sun, Moon, Clock, Home, BarChart3, Route, MapPin } from "lucide-react"
+import { Car, Bike, Truck, Navigation, Sun, Moon, Clock, Home, BarChart3, Route, MapPin,Zap } from "lucide-react"
 import type { Page, TripData } from "../page"
 
 interface HomePageProps {
@@ -192,10 +192,10 @@ export default function HomePage({
       <div className="flex items-center justify-between mb-8">
         <div className="flex items-center gap-3">
           <div className="w-12 h-12 bg-gradient-to-r from-blue-500 to-green-500 rounded-xl flex items-center justify-center">
-            <Navigation className="w-7 h-7 text-white" />
+            <Zap className="w-7 h-7 text-white" />
           </div>
           <div>
-            <h1 className="text-2xl font-bold text-foreground">SmartRoute AI</h1>
+            <h1 className="text-2xl font-bold text-foreground">3jeja</h1>
           </div>
         </div>
 
