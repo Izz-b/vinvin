@@ -22,9 +22,10 @@ import {
   Info,
   CheckCircle,
   AlertCircle,
-  Zap
+  Clock,
 } from "lucide-react"
 import type { Page, TripData, PredictionResult } from "../page"
+import DualLeafletMap from "./dual-leaflet-map"
 
 interface ResultsPageProps {
   language: "en" | "ar"
@@ -163,16 +164,8 @@ export default function ResultsPage({
       // Simulate API call
       await new Promise((resolve) => setTimeout(resolve, 1500))
 
-      // In real implementation, send to backend:
-      // await fetch('/api/feedback', {
-      //   method: 'POST',
-      //   headers: { 'Content-Type': 'application/json' },
-      //   body: JSON.stringify(feedbackData)
-      // })
-
       setFeedbackSent(type === "accept" ? "accepted" : "suggested")
 
-      // Show success message
       setTimeout(() => {
         if (type === "accept") {
           // Could navigate to a tracking page or stay here
@@ -189,6 +182,12 @@ export default function ResultsPage({
 
   const reasoningData = getReasoningData()
 
+  // Dummy data for optimized route info, as it's not passed from DualLeafletMap
+  const optimizedRouteInfo = {
+    duration: "25 min",
+    distance: "12 km",
+  }
+
   return (
     <div className="container mx-auto px-4 py-6 max-w-md">
       {/* Header */}
@@ -198,7 +197,7 @@ export default function ResultsPage({
             <ArrowLeft className="w-5 h-5" />
           </Button>
           <div className="flex items-center gap-2">
-            <Zap className="w-6 h-6 text-blue-500" />
+            <Navigation className="w-6 h-6 text-blue-500" />
             <h1 className="text-xl font-bold text-foreground">
               {language === "en" ? "Your Smart Route" : "طريقك الذكي"}
             </h1>
@@ -249,24 +248,52 @@ export default function ResultsPage({
         </CardContent>
       </Card>
 
-      {/* Map Placeholder */}
+      {/* Smart Route */}
       <Card className="mb-6">
-        <CardContent className="p-4">
-          <div className="bg-muted rounded-lg h-64 flex items-center justify-center relative overflow-hidden">
-            <div className="absolute inset-0 bg-gradient-to-br from-blue-100 via-green-100 to-blue-100 dark:from-blue-900 dark:via-green-900 dark:to-blue-900"></div>
-            <div className="relative z-10 text-center">
-              <Map className="w-16 h-16 mx-auto mb-3 text-muted-foreground" />
-              <p className="text-lg font-medium text-muted-foreground mb-1">
-                {language === "en" ? "Interactive Route Map" : "خريطة الطريق التفاعلية"}
-              </p>
-              <p className="text-sm text-muted-foreground">
-                {language === "en" ? "Leaflet/Mapbox Integration" : "تكامل Leaflet/Mapbox"}
-              </p>
+        <CardHeader>
+          <CardTitle className="text-lg">{language === "en" ? "Smart Route" : "الطريق الذكي"}</CardTitle>
+          <p className="text-sm text-muted-foreground">
+            {language === "en" ? "The fastest route based on live traffic" : "أسرع طريق بناءً على حركة المرور الحية"}
+          </p>
+        </CardHeader>
+        <CardContent>
+          {optimizedRouteInfo && (
+            <div className="flex items-center gap-4">
+              <div className="flex items-center gap-1 text-blue-600 dark:text-blue-400">
+                <Clock className="w-4 h-4" />
+                <span className="text-lg font-bold">{optimizedRouteInfo.duration.split(" ")[0]}</span>
+                <span className="text-sm text-muted-foreground">{optimizedRouteInfo.duration.split(" ")[1]}</span>
+              </div>
+              <div className="flex items-center gap-1 text-blue-600 dark:text-blue-400">
+                <Route className="w-4 h-4" />
+                <span className="text-lg font-bold">{optimizedRouteInfo.distance.split(" ")[0]}</span>
+                <span className="text-sm text-muted-foreground">{optimizedRouteInfo.distance.split(" ")[1]}</span>
+              </div>
             </div>
-            {/* Simulated route line */}
-            <div className="absolute top-1/4 left-1/4 w-1/2 h-1 bg-blue-500 rounded transform rotate-12"></div>
-            <div className="absolute top-1/2 right-1/4 w-1/3 h-1 bg-green-500 rounded transform -rotate-12"></div>
-          </div>
+          )}
+        </CardContent>
+      </Card>
+
+      {/* Dual Maps - Original vs Optimized */}
+      <Card className="mb-6">
+        <CardHeader>
+          <CardTitle className="text-lg flex items-center gap-2">
+            <Map className="w-5 h-5 text-blue-500" />
+            {language === "en" ? "Route Comparison" : "مقارنة الطرق"}
+          </CardTitle>
+          <p className="text-sm text-muted-foreground">
+            {language === "en"
+              ? "Compare direct route vs AI-optimized route"
+              : "قارن بين الطريق المباشر والطريق المحسن بالذكاء الاصطناعي"}
+          </p>
+        </CardHeader>
+        <CardContent className="p-4">
+          <DualLeafletMap
+            fromAddress={tripData.fromAddress || ""}
+            toAddress={tripData.toAddress || ""}
+            language={language}
+            className="w-full"
+          />
         </CardContent>
       </Card>
 
