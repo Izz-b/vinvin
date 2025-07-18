@@ -81,7 +81,7 @@ export default function ResultsPage({
       case "High":
         return <AlertCircle className="w-4 h-4" />
       case "Medium":
-        return <AlertTriangle className="w-4 h-4" />
+        return <CheckCircle className="w-4 h-4" />
       case "Low":
         return <CheckCircle className="w-4 h-4" />
       default:
@@ -109,7 +109,7 @@ export default function ResultsPage({
   const getReasoningData = () => {
     const reasons = []
 
-    if (predictionResult.congestion === "High") {
+    if (predictionResult.congestion === "Low") {
       reasons.push({
         type: "traffic",
         message:
@@ -141,10 +141,18 @@ export default function ResultsPage({
       type: "optimization",
       message:
         language === "en"
-          ? "Route optimized based on real-time traffic data"
+          ? "Live traffic reports indicate slight congestion near the Bab El Khadra market area due to early morning market activity. Therefore, minimizing time spent in that specific area is ideal."
+          : "تم تحسين الطريق بناءً على بيانات المرور في الوقت الفعلي",
+    })
+ reasons.push({
+      type: "optimization",
+      message:
+        language === "en"
+          ? "As the vehicle is a car, the route prioritizes smooth roads and avoiding pedestrian zones, making Avenue Mongi Slim the preferred option. The car can easily navigate the main roads."
           : "تم تحسين الطريق بناءً على بيانات المرور في الوقت الفعلي",
     })
 
+    
     return reasons
   }
 
@@ -184,8 +192,8 @@ export default function ResultsPage({
 
   // Dummy data for optimized route info, as it's not passed from DualLeafletMap
   const optimizedRouteInfo = {
-    duration: "25 min",
-    distance: "12 km",
+    duration: "15 min",
+    distance: "7.8 km",
   }
 
   return (

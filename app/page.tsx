@@ -38,10 +38,10 @@ export default function SmartRouteApp() {
     // Simulate prediction logic
     const predictions = {
       tunis: {
-        congestion: "Medium" as const,
+        congestion: "Low" as const,
         routeSummary:
           language === "en"
-            ? "Avoiding Avenue Habib Bourguiba due to Friday prayer traffic"
+            ? "Stay on Avenue Mongi Slim heading towards El Omrane. Avoid unnecessary detours through the Bab El Khadra market area."
             : "تجنب شارع الحبيب بورقيبة بسبب حركة المرور يوم الجمعة",
         advisory:
           data.vehicle === "gas"

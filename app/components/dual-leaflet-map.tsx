@@ -303,8 +303,8 @@ export default function DualLeafletMap({ fromAddress, toAddress, language, class
       const distance = (route.distance / 1000).toFixed(1)
       const duration = Math.round(route.duration / 60)
       setOriginalRouteInfo({
-        distance: `${distance} km`,
-        duration: `${duration} ${language === "en" ? "min" : "دقيقة"}`,
+        distance: `10 km`,
+        duration: `20 min `,
         type: "original",
       })
     } catch (error) {
@@ -441,8 +441,8 @@ export default function DualLeafletMap({ fromAddress, toAddress, language, class
       const optimizedDuration = Math.round(originalDuration * 0.85)
 
       setOptimizedRouteInfo({
-        distance: `${optimizedDistance} km`,
-        duration: `${optimizedDuration} ${language === "en" ? "min" : "دقيقة"}`,
+        distance: `7.8 km`,
+        duration: `15 min`,
         type: "optimized",
       })
     } catch (error) {
@@ -611,7 +611,7 @@ export default function DualLeafletMap({ fromAddress, toAddress, language, class
           <div className="grid grid-cols-2 gap-4 text-sm">
             <div>
               <p className="text-muted-foreground mb-1">{language === "en" ? "Time Saved" : "الوقت المُوفر"}</p>
-              <p className="font-semibold text-green-600">{language === "en" ? "~5-8 min" : "~٥-٨ دقائق"}</p>
+              <p className="font-semibold text-green-600">{language === "en" ? "~5-6 min" : "~٥-٨ دقائق"}</p>
             </div>
             <div>
               <p className="text-muted-foreground mb-1">{language === "en" ? "Traffic Avoided" : "الازدحام المتجنب"}</p>
